@@ -13,6 +13,8 @@ Two families of tools, one engine:
 Pays per call with [x402](https://x402.org): USDC on Base, no account, no API key, no
 subscription. From **$0.03** per call.
 
+Walkthrough with a working x402 client example: <https://mydev-tools.tech/agents/reliability/>
+
 ## Why it works this way
 
 The server runs on **your** machine with **your** wallet. It signs payments locally and the
