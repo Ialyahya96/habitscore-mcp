@@ -1,0 +1,44 @@
+# Publishes habitscore-mcp to npm with npm trusted publishing (OIDC).
+#
+# No npm token exists anywhere: npmjs.com trusts this exact repository and
+# workflow file (configured once under the package's Settings > Trusted
+# publishing), and GitHub's OIDC token is what proves the run is ours. That is
+# also why the filename matters: renaming this file breaks publishing with an
+# E404 until the trusted publisher is updated to match.
+#
+# Run it from the Actions tab (workflow_dispatch) after bumping "version" in
+# package.json, or by publishing a GitHub release.
+name: publish
+
+on:
+  workflow_dispatch:
+  release:
+    types: [published]
+
+permissions:
+  contents: read
+  id-token: write # required for npm trusted publishing
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      # Node 24 ships npm 11.x; trusted publishing needs npm >= 11.5.1.
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          registry-url: https://registry.npmjs.org
+      - run: npm --version
+      - run: npm ci
+      - run: npm run build
+      # Refuse to re-publish a version npm already has: a clear message here
+      # beats npm's generic 403 for an existing version.
+      - name: Check the version is new
+        run: |
+          V=$(node -p "require('./package.json').version")
+          if npm view "habitscore-mcp@$V" version >/dev/null 2>&1; then
+            echo "::error::habitscore-mcp@$V is already on npm. Bump version in package.json first."
+            exit 1
+          fi
+      - run: npm publish --access public
