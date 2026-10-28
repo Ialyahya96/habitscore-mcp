@@ -1,0 +1,61 @@
+{
+  "name": "habitscore-mcp",
+  "version": "1.0.1",
+  "mcpName": "tech.mydev-tools/habitscore",
+  "description": "MCP server for Habitscore: reliability scoring for an agent’s scheduled jobs and pipelines, plus habit analytics. Deterministic, no LLM. Pays per call with x402 (USDC on Base); quote-only without a wallet.",
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "x402",
+    "behavioural-analytics",
+    "habits",
+    "adherence",
+    "consistency",
+    "streaks",
+    "agent-payments",
+    "usdc",
+    "base",
+    "reliability",
+    "cron",
+    "pipelines",
+    "agent-tools",
+    "mcp-server"
+  ],
+  "homepage": "https://mydev-tools.tech",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ialyahya96/habitscore-mcp.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Ialyahya96/habitscore-mcp/issues"
+  },
+  "license": "MIT",
+  "type": "module",
+  "bin": {
+    "habitscore-mcp": "dist/index.js"
+  },
+  "main": "dist/index.js",
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build": "tsc -p .",
+    "start": "node dist/index.js",
+    "dev": "tsc -p . && node dist/index.js"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.30.0",
+    "@x402/core": "^2.20.0",
+    "@x402/evm": "^2.20.0",
+    "viem": "^2.40.0",
+    "zod": "^3.25.76"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "typescript": "^5.7.0"
+  }
+}

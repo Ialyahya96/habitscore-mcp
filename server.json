@@ -1,0 +1,46 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "tech.mydev-tools/habitscore",
+  "description": "Reliability scoring for agent jobs and habit analytics. Pay per call via x402 (USDC on Base).",
+  "version": "1.0.1",
+  "websiteUrl": "https://mydev-tools.tech",
+  "repository": {
+    "url": "https://github.com/Ialyahya96/habitscore-mcp",
+    "source": "github"
+  },
+  "packages": [
+    {
+      "registryType": "npm",
+      "registryBaseUrl": "https://registry.npmjs.org",
+      "identifier": "habitscore-mcp",
+      "version": "1.0.1",
+      "transport": {
+        "type": "stdio"
+      },
+      "environmentVariables": [
+        {
+          "name": "HABITSCORE_PRIVATE_KEY",
+          "description": "Private key of a Base wallet holding USDC. Signs payments locally and never leaves the process. Omit to run quote-only.",
+          "isRequired": false,
+          "isSecret": true,
+          "format": "string"
+        },
+        {
+          "name": "HABITSCORE_MAX_SPEND_USD",
+          "description": "Ceiling per tool call in USD. Default 0.25.",
+          "isRequired": false,
+          "isSecret": false,
+          "format": "string",
+          "default": "0.25"
+        },
+        {
+          "name": "BASE_RPC_URL",
+          "description": "Base RPC endpoint. Default https://mainnet.base.org.",
+          "isRequired": false,
+          "isSecret": false,
+          "format": "string"
+        }
+      ]
+    }
+  ]
+}
